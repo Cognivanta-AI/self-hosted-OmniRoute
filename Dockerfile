@@ -1,0 +1,7 @@
+ARG OMNIROUTE_IMAGE=diegosouzapw/omniroute:latest
+FROM ${OMNIROUTE_IMAGE}
+
+ENV NODE_ENV=production
+ENV PORT=20128
+
+EXPOSE 20128

@@ -1,0 +1,31 @@
+services:
+  omniroute:
+    image: ${OMNIROUTE_IMAGE:-diegosouzapw/omniroute:latest}
+    restart: unless-stopped
+    stop_grace_period: 40s
+    ports:
+      - "${OMNIROUTE_PORT:-20128}:20128"
+    expose:
+      - "20128"
+    environment:
+      NODE_ENV: "production"
+      PORT: "20128"
+      SERVICE_URL_OMNIROUTE_20128: "20128"
+      NEXT_PUBLIC_BASE_URL: "${NEXT_PUBLIC_BASE_URL:-${SERVICE_URL_OMNIROUTE_20128:-http://localhost:20128}}"
+      INITIAL_PASSWORD: "${INITIAL_PASSWORD:-${SERVICE_PASSWORD_64_OMNIROUTE:-changeme}}"
+      JWT_SECRET: "${JWT_SECRET:-${SERVICE_PASSWORD_64_OMNIROUTE_JWT:-change-this-long-random-secret}}"
+      OMNIROUTE_MEMORY_MB: "${OMNIROUTE_MEMORY_MB:-512}"
+      NODE_OPTIONS: "${NODE_OPTIONS:---max-old-space-size=512}"
+    volumes:
+      - omniroute-data:/app/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - node -e "fetch('http://127.0.0.1:'+(process.env.PORT||20128)).then(()=>process.exit(0)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  omniroute-data:
