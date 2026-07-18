@@ -154,13 +154,13 @@ This repository is a deployment template only. OmniRoute itself belongs to its u
 
 If this wrapper saves you time, you can support my work here:
 
-<p>
+<p align="center">
   <a href="https://www.buymeacoffee.com/genildof">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height:60px;width:217px;">
   </a>
 </p>
 
-<p>
+<p align="center">
   <img src="assets/bmc_qr.png" alt="Buy Me A Coffee QR Code" width="180">
 </p>
 
